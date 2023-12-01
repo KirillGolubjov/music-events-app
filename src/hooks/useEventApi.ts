@@ -22,7 +22,7 @@ export const useEventApi = (): EventApiHookType => {
     try {
       const response = await eventService.findAllEvents(page, pageSize);
       const allEvents = response.data._embedded?.events;
-      if (allEvents) {
+      if (allEvents && allEvents.length > 0) {
         setEvents(prevEvents => [...prevEvents, ...allEvents]);
       }
     } catch (error) {
