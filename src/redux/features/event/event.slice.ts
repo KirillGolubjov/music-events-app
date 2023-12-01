@@ -76,10 +76,12 @@ export const eventSlice = createSlice({
     });
 
     builder.addCase(findAllEvents.fulfilled, (state, action) => {
+      state.loading = false;
       if (action.payload?.length) {
         state.entities = [...state.entities, ...action.payload];
+      } else {
+        state.loading = true;
       }
-      state.loading = false;
       state.error = null;
     });
 

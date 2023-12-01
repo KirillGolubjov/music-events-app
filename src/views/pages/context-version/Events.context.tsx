@@ -47,10 +47,8 @@ export const EventProvider = ({ children }: EventProviderProps): JSX.Element => 
       window.innerHeight + document.documentElement.scrollTop >=
         document.documentElement.offsetHeight
     ) {
-      setCurrentPage(prevPage => {
-        findAllEvents(prevPage + 1, 20);
-        return prevPage + 1;
-      });
+      setCurrentPage(prevPage => prevPage + 1);
+      findAllEvents(currentPage + 1, 20);
     }
   };
 

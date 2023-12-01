@@ -7,7 +7,7 @@ import { findAllEvents } from "@/redux/features/event/event.slice";
 import { Body, Footer, Header } from "./structure";
 
 export const EventMain = (): JSX.Element => {
-  const { entities: events } = useAppSelector(selectEventsState);
+  const { entities: events, loading } = useAppSelector(selectEventsState);
   const dispatch = useAppDispatch();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -20,13 +20,12 @@ export const EventMain = (): JSX.Element => {
 
   const handleScroll = () => {
     if (
+      !loading &&
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight
+        document.documentElement.offsetHeight
     ) {
-      setCurrentPage(prevPage => {
-        dispatch(findAllEvents({ page: prevPage + 1, pageSize: 20 }));
-        return prevPage + 1;
-      });
+      setCurrentPage(prevPage => prevPage + 1);
+      dispatch(findAllEvents({ page: currentPage + 1, pageSize: 20 }));
     }
   };
 
@@ -35,7 +34,7 @@ export const EventMain = (): JSX.Element => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [currentPage]);
+  }, [handleScroll]);
 
   const searchedEvents =
     searchQuery.length > 0
