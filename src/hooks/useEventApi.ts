@@ -12,18 +12,22 @@ export interface EventApiHookType {
   events: Event[];
   findAllEvents: (page: number, pageSize: number) => Promise<void>;
   onFindById: (id: string) => Promise<void>;
+  allDataLoaded: boolean;
 }
 
 export const useEventApi = (): EventApiHookType => {
   const [event, setEvent] = useState<Event>(emptyEvent);
   const [events, setEvents] = useState<Event[]>([]);
+  const [allDataLoaded, setAllDataLoaded] = useState(false);
 
   const findAllEvents = async (page: number, pageSize: number) => {
     try {
       const response = await eventService.findAllEvents(page, pageSize);
       const allEvents = response.data._embedded?.events;
-      if (allEvents && allEvents.length > 0) {
+      if (allEvents && allEvents.length) {
         setEvents(prevEvents => [...prevEvents, ...allEvents]);
+      } else {
+        setAllDataLoaded(true);
       }
     } catch (error) {
       console.error(error);
@@ -49,5 +53,6 @@ export const useEventApi = (): EventApiHookType => {
     events,
     findAllEvents,
     onFindById,
+    allDataLoaded,
   };
 };

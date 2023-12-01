@@ -32,7 +32,7 @@ type EventProviderProps = {
 export const EventProvider = ({ children }: EventProviderProps): JSX.Element => {
   const genresApiHook = useGenreApi();
   const eventApiHook = useEventApi();
-  const { events, findAllEvents } = useEventApi();
+  const { events, findAllEvents, allDataLoaded } = useEventApi();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -43,8 +43,9 @@ export const EventProvider = ({ children }: EventProviderProps): JSX.Element => 
 
   const handleScroll = () => {
     if (
+      !allDataLoaded &&
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight
+        document.documentElement.offsetHeight
     ) {
       setCurrentPage(prevPage => {
         findAllEvents(prevPage + 1, 20);
