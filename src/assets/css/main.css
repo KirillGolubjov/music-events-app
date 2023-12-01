@@ -271,6 +271,9 @@ body {
   .container__body {
     grid-template-columns: repeat(2, calc(50%));
   }
+  .event__div {
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 776px) {
