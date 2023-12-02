@@ -18,7 +18,7 @@ export interface EventApiHookType {
 export const useEventApi = (): EventApiHookType => {
   const [event, setEvent] = useState<Event>(emptyEvent);
   const [events, setEvents] = useState<Event[]>([]);
-  const [allDataLoaded, setAllDataLoaded] = useState(false);
+  const [allDataLoaded, setAllDataLoaded] = useState<boolean>(false);
 
   const findAllEvents = async (page: number, pageSize: number) => {
     try {

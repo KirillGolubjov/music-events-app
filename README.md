@@ -1,3 +1,5 @@
+https://music-events-found.netlify.app/
+
 # Event Discovery App
 
 This is a React application built with Vite that allows users to discover and explore music events. The app integrates with the Ticketmaster Discovery API to fetch information about events, genres, and venues.
