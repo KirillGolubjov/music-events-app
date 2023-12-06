@@ -7,25 +7,31 @@ import { findAllEvents } from "@/redux/features/event/event.slice";
 import { Body, Footer, Header } from "./structure";
 
 export const EventMain = (): JSX.Element => {
-  const { entities: events, loading } = useAppSelector(selectEventsState);
+  const {
+    entities: events,
+    loading,
+    allLoaded,
+    page,
+    pageSize,
+  } = useAppSelector(selectEventsState);
   const dispatch = useAppDispatch();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(findAllEvents({ page: 1, pageSize: 20 }));
+    dispatch(findAllEvents({ page, pageSize }));
   }, [dispatch]);
 
   const handleScroll = () => {
-    if (
-      !loading &&
-      window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight
-    ) {
-      setCurrentPage(prevPage => prevPage + 1);
-      dispatch(findAllEvents({ page: currentPage + 1, pageSize: 20 }));
+    if (!loading && !allLoaded) {
+      const scrollThreshold =
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight;
+
+      if (scrollThreshold) {
+        dispatch(findAllEvents({ page: page + 1, pageSize }));
+      }
     }
   };
 

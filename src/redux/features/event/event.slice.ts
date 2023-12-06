@@ -23,6 +23,9 @@ const initialState: EntityState<Event> = {
   entity: emptyEvent,
   entities: [],
   loading: false,
+  allLoaded: false,
+  page: 1,
+  pageSize: 20,
 };
 
 export const findAllEvents: FindAllEventsAsynchThunk = createAsyncThunk<
@@ -79,9 +82,11 @@ export const eventSlice = createSlice({
       state.loading = false;
       if (action.payload?.length) {
         state.entities = [...state.entities, ...action.payload];
+        state.page = action.meta.arg.page;
       } else {
-        state.loading = true;
+        state.allLoaded = true;
       }
+
       state.error = null;
     });
 

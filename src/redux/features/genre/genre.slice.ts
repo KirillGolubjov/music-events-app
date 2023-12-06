@@ -17,6 +17,9 @@ const initialState: EntityState<Genre> = {
   entity: emptyGenre,
   entities: [],
   loading: false,
+  allLoaded: false,
+  page: 0,
+  pageSize: 0,
 };
 
 export const findAllGenres: FindAllGenresAsynchThunk = createAsyncThunk<

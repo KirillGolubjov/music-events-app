@@ -5,4 +5,7 @@ export interface EntityState<T> {
   entity: T;
   error: SerializedError | null;
   loading: boolean;
+  allLoaded: boolean;
+  page: number;
+  pageSize: number;
 }
