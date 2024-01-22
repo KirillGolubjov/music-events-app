@@ -80,7 +80,7 @@ export const eventSlice = createSlice({
 
     builder.addCase(findAllEvents.fulfilled, (state, action) => {
       state.loading = false;
-      if (action.payload?.length) {
+      if (action.payload && action.payload.length > 0) {
         state.entities = [...state.entities, ...action.payload];
         state.page = action.meta.arg.page;
       } else {
