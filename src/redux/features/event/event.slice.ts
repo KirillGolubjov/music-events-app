@@ -56,7 +56,7 @@ export const findEventById: FindEventAsynchThunk = createAsyncThunk<
 
 export const eventSlice = createSlice({
   name: "event",
-  initialState: initialState,
+  initialState,
   reducers: {
     eventResetMessages: state => {
       state.error = null;

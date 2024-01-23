@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/app";
 import { selectGenresState } from "@/redux/features/genre/genre.selectors";
 import { findAllGenres } from "@/redux/features/genre/genre.slice";
 
+import { Button } from "../ui/Button";
+
 import { MORE_GENRES } from "@/common/consts";
 
 interface Props {
@@ -46,28 +48,25 @@ export const Header = ({
           <h1>Music events</h1>
           <nav className="menu">
             <ul className="menu__list">
-              <button
-                className={`menu__item ${selectedGenre === null ? "selected" : ""}`}
+              <Button
+                type={`menu__item ${selectedGenre === null ? "selected" : ""}`}
                 onClick={() => onGenreClick(null)}
               >
                 All Genres
-              </button>
+              </Button>
               {displayedGenres.map(gen => (
-                <button
-                  className={`menu__item ${selectedGenre === gen.id ? "selected" : ""}`}
+                <Button
+                  type={`menu__item ${selectedGenre === gen.id ? "selected" : ""}`}
                   key={gen.id}
                   onClick={() => onGenreClick(gen.id)}
                 >
                   {gen.name}
-                </button>
+                </Button>
               ))}
               {genres.length > 5 && (
-                <button
-                  className={`menu__item ${showAllGenres ? "icon" : ""}`}
-                  onClick={onToggleGenres}
-                >
+                <Button type={`menu__item ${showAllGenres ? "icon" : ""}`} onClick={onToggleGenres}>
                   {showAllGenres ? <IoClose /> : MORE_GENRES}
-                </button>
+                </Button>
               )}
             </ul>
           </nav>

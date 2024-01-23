@@ -3,7 +3,9 @@ import { IoCalendar } from "react-icons/io5";
 
 import { Event } from "@/types/event.model";
 
-import { EventImage } from "./Image";
+import { Button } from "../../ui/Button";
+
+import { EventImage } from "./Image.card";
 
 import { STATIC_TEXT } from "@/common/consts";
 import { formatJsDate_DD_MM_YYYY, getDayOfWeek, formatJsTimeHH_MM } from "@/common/utils/utils";
@@ -37,9 +39,9 @@ export const DetailsCard = ({
         </p>
 
         <p className="event__text">{STATIC_TEXT}</p>
-        <button className="event__button" type="button" onClick={onClose}>
+        <Button type={"event__button"} onClick={onClose}>
           Close details
-        </button>
+        </Button>
       </div>
       <EventImage images={images} />
     </div>

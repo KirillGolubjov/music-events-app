@@ -5,6 +5,8 @@ import { Event } from "@/types/event.model";
 import { useAppSelector } from "@/redux/app";
 import { selectEventsState } from "@/redux/features/event/event.selectors";
 
+import { Button } from "../../ui/Button";
+
 import { DetailsCard } from "./Details.card";
 
 import { getBestQualityImage } from "@/common/utils/event-utils";
@@ -56,15 +58,15 @@ export const MainCard = ({ searchedEvents, selectedGenre }: MainCardProps): JSX.
       {sortedEventsByDate.map(event => (
         <Fragment key={event?.id}>
           <div className="event__div">
-            <button
+            <Button
               onClick={() => onToggleEventDetails(event.id)}
-              className="event__card"
+              type="event__card"
               style={{
                 backgroundImage: `url(${getBestQualityImage(event?.images)?.url})`,
               }}
             >
               {selectedEventId === event?.id && <div className="triangle" />}
-            </button>
+            </Button>
           </div>
           {selectedEventId === event?.id && (
             <DetailsCard event={event} onClose={onCloseEventDetails} />

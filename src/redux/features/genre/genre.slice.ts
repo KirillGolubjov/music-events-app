@@ -37,7 +37,7 @@ export const findAllGenres: FindAllGenresAsynchThunk = createAsyncThunk<
 
 export const genreSlice = createSlice({
   name: "genre",
-  initialState: initialState,
+  initialState,
   reducers: {
     genreResetMessages: state => {
       state.error = null;
