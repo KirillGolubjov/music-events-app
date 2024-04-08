@@ -1,4 +1,4 @@
-https://music-events-found.netlify.app/
+https://events-music.netlify.app/
 
 # Event Discovery App
 
